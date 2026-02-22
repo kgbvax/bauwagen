@@ -1,6 +1,6 @@
 # ACOM Amplifier Monitor
 
-`acom-mon` is a Go-based service designed to monitor and control ACOM 600S and 1200S solid-state amplifiers via their RS-232 serial interface. It decodes the amplifier's proprietary telemetry protocol and integrates seamlessly with Home Assistant via MQTT Auto Discovery.
+`acom-mon` is a Go-based service designed to monitor and control ACOM 600S and 1200S solid-state amplifiers via their RS-232 serial interface. It decodes the amplifier's proprietary telemetry protocol and publishes values to an MQTT broker. It also integrates seamlessly with Home Assistant via MQTT Auto Discovery.
 
 ## Features
 
