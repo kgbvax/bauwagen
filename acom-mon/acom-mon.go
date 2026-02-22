@@ -1,6 +1,6 @@
 package main
 
-/*  Acom Monitor - an ACOM PA to MQTT (Home Assistant) connector
+/*  Acom Monitor - an ACOM PA to MQTT (&Home Assistant) connector.
     Copyright (C) 2026 Ingomar Otter, DL9ET
 
     This program is free software: you can redistribute it and/or modify
