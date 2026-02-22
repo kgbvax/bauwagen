@@ -13,6 +13,18 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goos: windows
+            goarch: amd64
+          - goos: linux
+            goarch: arm
+            goarm: 7
+          - goos: linux
+            goarch: amd64
+          - goos: darwin
+            goarch: arm64
     steps:
     - uses: actions/checkout@v4
 
@@ -20,9 +32,17 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.20'
+        cache-dependency-path: acom-mon/go.sum
 
     - name: Build
-      run: go build -v acom-mon/...
+      env:
+        GOOS: ${{ matrix.goos }}
+        GOARCH: ${{ matrix.goarch }}
+        GOARM: ${{ matrix.goarm }}
+      working-directory: acom-mon
+      run: go build -v -o ../acom-mon-${{ matrix.goos }}-${{ matrix.goarch }} .
 
     - name: Test
-      run: go test -v acom-mon/...
+      if: matrix.goos == 'linux' && matrix.goarch == 'amd64'
+      working-directory: acom-mon
+      run: go test -v ./...
