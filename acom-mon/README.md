@@ -49,7 +49,7 @@ When running, the service publishes configuration payloads to the `homeassistant
 - **Input Power** (`sensor.acom_amplifier_input_power`): Drive power in Watts.
 - **SWR** (`sensor.acom_amplifier_swr`): Standing Wave Ratio.
 - **Temperature** (`sensor.acom_amplifier_temperature`): PA temperature in °C.
-- **Frequency** (`sensor.acom_amplifier_frequency`): Operating frequency in kHz.
+- **Frequency** (`sensor.acom_amplifier_frequency`): Operating frequency (during TX) in kHz 
 - **Band** (`sensor.acom_amplifier_band`): Current band (e.g., 20m, 40m).
 - **Mode** (`sensor.acom_amplifier_mode`): Current state (e.g., OPR/TX, STANDBY, OFF).
 - **Status** (`sensor.acom_amplifier_status`): Error messages or warnings (e.g., "NONE", "HIGH SWR").
