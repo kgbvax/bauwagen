@@ -59,6 +59,39 @@ When running, the service publishes configuration payloads to the `homeassistant
   - **ON**: Sets amplifier to `OPR` (Operate) mode.
   - **OFF**: Sets amplifier to `STB` (Standby) mode.
 
+## MQTT Topics
+
+The service interacts with the MQTT broker using the following topics:
+
+### Published Topics
+
+- **`acom/state`**: Publishes a JSON payload containing the amplifier's real-time telemetry data. This is the primary state topic.
+- **`homeassistant/sensor/acom_amplifier/<entity>/config`**: Publishes configuration messages for Home Assistant MQTT Discovery. This allows sensors to be automatically created.
+- **`homeassistant/switch/acom_amplifier/operate/config`**: Publishes the configuration for the operate/standby switch.
+
+### Subscribed Topics
+
+- **`acom/control/operate/set`**: Listens for commands to change the amplifier's mode. Accepts `ON` (for OPR) and `OFF` (for STB).
+
+### State Payload Example (`acom/state`)
+
+Here is an example of the JSON payload published to the `acom/state` topic:
+
+```json
+{
+  "fwd": 1205,
+  "ref": 10,
+  "in": 45.5,
+  "swr": 1.15,
+  "temp": 55.5,
+  "freq": 14250,
+  "band": "20m",
+  "mode": "OPR/TX",
+  "err_code": "0xFF",
+  "err_msg": "NONE"
+}
+```
+
 ## Requirements
 - ACOM 600S or 1200S Amplifier connected via RS-232 
 - MQTT Broker (e.g., Mosquitto).
