@@ -1,5 +1,22 @@
 package main
 
+/*  Acom Monitor - an ACOM PA to MQTT (Home Assistant) connector
+    Copyright (C) 2026 Ingomar Otter, DL9ET
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 import (
 	"encoding/binary"
 	"encoding/hex"
@@ -148,12 +165,14 @@ type HADevice struct {
 func main() {
 	flag.BoolVar(&debugMode, "debug", false, "Enable hex dump of serial I/O")
 	portPath := flag.String("port", SerialPort, "Serial port path")
+	mqttHost := flag.String("mqtt-host", "192.168.1.50", "MQTT Broker IP")
+	mqttUser := flag.String("mqtt-user", "hf", "MQTT Username")
 	mqttPass := flag.String("mqtt-pass", "", "MQTT Password")
 	avgTimeMs := flag.Int("avg-time", 300, "Time window in milliseconds for Forward Power moving average")
 	flag.Parse()
 
 	setupSignalHandler()
-	setupMQTT("192.168.1.50", "hf", *mqttPass)
+	setupMQTT(*mqttHost, *mqttUser, *mqttPass)
 
 	// Start the Watchdog
 	go telemetryWatchdog()
